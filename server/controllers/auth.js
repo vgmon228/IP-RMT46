@@ -24,6 +24,7 @@ class Auth {
                 let payload = { id: user.id }
                 let token = signToken(payload)
                 res.status(200).json({ access_token: token })
+                return
             }
             throw { name: "Authentication", message:'Invalid email/password' }
         } catch (error) {
