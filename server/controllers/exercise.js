@@ -17,5 +17,14 @@ class ControllerExercise {
         }
     }
 
+    static async showExercise(req,res){
+        try {
+            let exercise = await Exercise.findAll()
+            res.status(200).json(exercise)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 }
 module.exports = ControllerExercise

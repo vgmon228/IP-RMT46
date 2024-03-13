@@ -5,5 +5,6 @@ const ControllerExercise = require('../controllers/exercise')
 
 router.use(auth)
 router.post('/exercise', ControllerExercise.createExercise)
+router.get('/exercise', ControllerExercise.showExercise)
 
 module.exports = router
