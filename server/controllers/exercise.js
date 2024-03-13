@@ -17,10 +17,21 @@ class ControllerExercise {
         }
     }
 
-    static async showExercise(req,res){
+    static async showExercise(req, res) {
         try {
             let exercise = await Exercise.findAll()
             res.status(200).json(exercise)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async deleteExercise(req, res) {
+        let { id } = req.params
+        try {
+            let exercise = await Exercise.findByPk(id)
+            exercise.destroy()
+            res.status(200).json({message:'Exercise successfully deleted'})
         } catch (error) {
             console.log(error)
         }
