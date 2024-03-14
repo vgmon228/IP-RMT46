@@ -15,8 +15,12 @@ module.exports = {
       type: {
         type: Sequelize.STRING
       },
-      muscle: {
-        type: Sequelize.STRING
+      MuscleId: {
+        type: Sequelize.INTEGER,
+        references:{
+          model:'Muscles',
+          key:'id'
+        }
       },
       equipment: {
         type: Sequelize.STRING
@@ -25,7 +29,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       instructions: {
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

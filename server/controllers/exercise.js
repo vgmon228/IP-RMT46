@@ -1,4 +1,19 @@
 const { Exercise } = require('../models')
+const axios = require('axios');
+const ninja_key = process.env.API_NINJA
+
+function options(value) {
+    return {
+        method: 'GET',
+        url: 'https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises',
+        params: { muscle: value },
+        headers: {
+            'X-RapidAPI-Key': ninja_key,
+            'X-RapidAPI-Host': 'exercises-by-api-ninjas.p.rapidapi.com'
+        }
+    }
+};
+
 class ControllerExercise {
     static async createExercise(req, res) {
         let { name, type, muscle, equipment, difficulty, instructions } = req.body
@@ -31,7 +46,7 @@ class ControllerExercise {
         try {
             let exercise = await Exercise.findByPk(id)
             exercise.destroy()
-            res.status(200).json({message:'Exercise successfully deleted'})
+            res.status(200).json({ message: 'Exercise successfully deleted' })
         } catch (error) {
             console.log(error)
         }
