@@ -1,7 +1,7 @@
 const { Exercise } = require('../models')
 
 class ControllerExercise {
-    static async createExercise(req, res) {
+    static async createExercise(req, res, next) {
         let { name, type, muscle, equipment, difficulty, instructions } = req.body
         try {
             let exercise = await Exercise.create({ name, type, muscle, equipment, difficulty, instructions })
@@ -15,19 +15,21 @@ class ControllerExercise {
             })
         } catch (error) {
             console.log(error)
+            nexx(error)
         }
     }
 
-    static async showExercise(req, res) {
+    static async showExercise(req, res, next) {
         try {
             let exercise = await Exercise.findAll()
             res.status(200).json(exercise)
         } catch (error) {
             console.log(error)
+            next(error)
         }
     }
 
-    static async deleteExercise(req, res) {
+    static async deleteExercise(req, res, next) {
         let { id } = req.params
         try {
             let exercise = await Exercise.findByPk(id)
@@ -35,6 +37,7 @@ class ControllerExercise {
             res.status(200).json({ message: 'Exercise successfully deleted' })
         } catch (error) {
             console.log(error)
+            next(error)
         }
     }
 
