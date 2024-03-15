@@ -33,6 +33,7 @@ class ControllerExercise {
         let { id } = req.params
         try {
             let exercise = await Exercise.findByPk(id)
+            if (!exercise) throw ({ name: 'Not Found', message: 'Exercise not found' })
             exercise.destroy()
             res.status(200).json({ message: 'Exercise successfully deleted' })
         } catch (error) {
