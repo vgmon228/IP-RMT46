@@ -2,20 +2,20 @@ const { Exercise } = require('../models')
 
 class ControllerExercise {
     static async createExercise(req, res, next) {
-        let { name, type, muscle, equipment, difficulty, instructions } = req.body
+        let { name, type, MuscleId, equipment, difficulty, instructions } = req.body
         try {
-            let exercise = await Exercise.create({ name, type, muscle, equipment, difficulty, instructions })
+            let exercise = await Exercise.create({ name, type, MuscleId, equipment, difficulty, instructions })
             res.status(201).json({
                 name: exercise.name,
                 type: exercise.type,
-                muscle: exercise.muscle,
+                MuscleId: exercise.MuscleId,
                 equipment: exercise.equipment,
                 difficulty: exercise.difficulty,
                 instructions: exercise.instructions
             })
         } catch (error) {
             console.log(error)
-            nexx(error)
+            next(error)
         }
     }
 

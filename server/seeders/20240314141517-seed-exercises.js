@@ -20,24 +20,30 @@ function options(value) {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    let data = []
-      (async () => {
-        try {
-          for (let index = 0; index < muscle.length; index++) {
-            const response = await axios.request(options(muscle[index]));
-            response.data.map((e) => {
-              delete e.muscle
-              e.MuscleId = index + 1
-              e.createdAt = new Date()
-              e.updatedAt = new Date()
-              data.push(e)
-            })
-            await queryInterface.bulkInsert('Exercises', data, {})
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      })()
+    try {
+    let rest = await Promise.all(muscle.map(el => axios(options(el))))
+
+    let data = rest.map((el, index) => {
+      let newObj = [...el.data]
+      newObj.forEach((l => {
+        l.MuscleId = index + 1
+        l.createdAt = new Date()
+        l.updatedAt = new Date()
+        delete l.muscle
+      }))
+      // console.log(el)
+      return newObj
+    })
+
+    data = data.flat()
+      await queryInterface.bulkInsert("Exercises", data, {})
+      
+    } catch (error) {
+      await queryInterface.bulkInsert("Exercises", require("./exercise.json"), {})
+      console.log(error)
+
+      throw error
+    }
   },
 
   async down(queryInterface, Sequelize) {

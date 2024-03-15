@@ -2,34 +2,25 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Exercises', {
+    await queryInterface.createTable('Bmis', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      type: {
-        type: Sequelize.STRING
-      },
-      MuscleId: {
+      UserId: {
         type: Sequelize.INTEGER,
         references:{
-          model:'Muscles',
+          model:'Users',
           key:'id'
         }
       },
-      equipment: {
-        type: Sequelize.STRING
+      bmi: {
+        type: Sequelize.REAL
       },
-      difficulty: {
+      status: {
         type: Sequelize.STRING
-      },
-      instructions: {
-        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -42,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Exercises');
+    await queryInterface.dropTable('Bmis');
   }
 };
