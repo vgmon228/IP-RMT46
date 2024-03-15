@@ -6,8 +6,8 @@ const ControllerBmi = require('../controllers/bmi')
 const authentication = require('../middlewares/authentication')
 
 router.use(auth)
-router.use(exercise)
 router.use(authentication)
+router.use(exercise)
 router.post('/bmi', ControllerBmi.getBmi)
 
 module.exports = router

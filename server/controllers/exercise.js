@@ -34,10 +34,23 @@ class ControllerExercise {
         try {
             let exercise = await Exercise.findByPk(id)
             if (!exercise) throw ({ name: 'Not Found', message: 'Exercise not found' })
-            exercise.destroy()
+            await exercise.destroy()
             res.status(200).json({ message: 'Exercise successfully deleted' })
         } catch (error) {
             console.log(error)
+            next(error)
+        }
+    }
+
+    static async updateExercise(req, res, next) {
+        let { id } = req.params
+        let { name, type, MuscleId, equipment, difficulty, instructions } = req.body
+        try {
+            let exercise = await Exercise.findByPk(id)
+            if (!exercise) throw ({ name: 'Not Found', message: 'Exercise not found' })
+            await exercise.update({ name, type, MuscleId, equipment, difficulty, instructions })
+            res.status(200).json(exercise)
+        } catch (error) {
             next(error)
         }
     }
