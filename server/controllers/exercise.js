@@ -20,9 +20,30 @@ class ControllerExercise {
     }
 
     static async showExercise(req, res, next) {
+        let { page } = req.query
         try {
-            let exercise = await Exercise.findAll()
-            res.status(200).json(exercise)
+            if (!Number(page)) {
+                page = 1
+            }
+            let limit = 10
+            let queryOption = {
+                limit: limit,
+                offset: (page - 1) * limit
+            }
+            let { count, rows } = await Exercise.findAndCountAll(queryOption)
+            let total = count
+            let size = limit
+            let totalPage = Math.ceil(total / size)
+            let currentPage = page
+            let data = rows
+            let result = {
+                total,
+                size,
+                totalPage,
+                currentPage,
+                data
+            }
+            res.status(200).json(result)
         } catch (error) {
             console.log(error)
             next(error)
