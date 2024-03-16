@@ -15,9 +15,11 @@ class ControllerBmi {
     static async getBmi(req, res, next) {
         let { height, weight } = req.body
         try {
+            if (!height) throw ({ name: 'Bad Request', message: 'height/weight is required' })
+            if (!weight) throw ({ name: 'Bad Request', message: 'height/weight is required' })
             const response = await axios.request(options(height, weight));
             let { bmi, status } = response.data
-            res.status(200).json({ bmi , status})
+            res.status(200).json({ bmi, status })
         } catch (error) {
             console.log(error)
             next(error)

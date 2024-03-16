@@ -46,6 +46,12 @@ class ControllerExercise {
         let { id } = req.params
         let { name, type, MuscleId, equipment, difficulty, instructions } = req.body
         try {
+            if (!name) throw { name: 'Bad Request', message: "Name is required" }
+            if (!type) throw { name: 'Bad Request', message: "Type is required" }
+            if (!MuscleId) throw { name: 'Bad Request', message: "MuscleId is required" }
+            if (!equipment) throw { name: 'Bad Request', message: "Equipment is required" }
+            if (!difficulty) throw { name: 'Bad Request', message: "Difficulty is required" }
+            if (!instructions) throw { name: 'Bad Request', message: "Instruction is required" }
             let exercise = await Exercise.findByPk(id)
             if (!exercise) throw ({ name: 'Not Found', message: 'Exercise not found' })
             await exercise.update({ name, type, MuscleId, equipment, difficulty, instructions })

@@ -15,12 +15,78 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Exercise.init({
-    name: DataTypes.STRING,
-    type: DataTypes.STRING,
-    MuscleId: DataTypes.INTEGER,
-    equipment: DataTypes.STRING,
-    difficulty: DataTypes.STRING,
-    instructions: DataTypes.STRING
+    name: {
+      type : DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Name is required "
+        },
+        notNull: {
+          msg: "Name is required "
+        }
+      }
+    },
+    type: {
+      type : DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Type is required "
+        },
+        notNull: {
+          msg: "Type is required "
+        }
+      }
+    },
+    MuscleId: {
+      type : DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "MuscleId is required "
+        },
+        notNull: {
+          msg: "MuscleId is required "
+        }
+      }
+    },
+    equipment: {
+      type : DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Equipment is required "
+        },
+        notNull: {
+          msg: "Equipment is required "
+        }
+      }
+    },
+    difficulty: {
+      type : DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Difficulty is required "
+        },
+        notNull: {
+          msg: "Difficulty is required "
+        }
+      }
+    },
+    instructions: {
+      type : DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Instruction is required "
+        },
+        notNull: {
+          msg: "Instruction is required "
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Exercise',
