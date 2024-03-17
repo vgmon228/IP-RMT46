@@ -2,6 +2,8 @@ import {createBrowserRouter, redirect} from 'react-router-dom'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Home from '../pages/Home'
+import Create from '../pages/Create'
+import Bmi from '../pages/Bmi'
 
 
 const router = createBrowserRouter([
@@ -22,6 +24,20 @@ const router = createBrowserRouter([
 {
     path:'/',
     element:<Home/>,
+    loader: () =>{
+        return !localStorage.getItem('token') ? redirect('/login') : null 
+    }
+},
+{
+    path:'/add',
+    element:<Create/>,
+    loader: () =>{
+        return !localStorage.getItem('token') ? redirect('/login') : null 
+    }
+},
+{
+    path:'/bmi',
+    element:<Bmi/>,
     loader: () =>{
         return !localStorage.getItem('token') ? redirect('/login') : null 
     }
