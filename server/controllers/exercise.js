@@ -1,6 +1,14 @@
-const { Exercise } = require('../models')
+const { Exercise, Muscle} = require('../models')
 
 class ControllerExercise {
+    static async getMuscle(req,res,next){
+        try {
+            let muscle = await Muscle.findAll()
+            res.status(200).json(muscle) 
+        } catch (error) {
+            next(error)
+        }
+    }
     static async createExercise(req, res, next) {
         let { name, type, MuscleId, equipment, difficulty, instructions } = req.body
         try {
@@ -25,7 +33,7 @@ class ControllerExercise {
             if (!Number(page)) {
                 page = 1
             }
-            let limit = 10
+            let limit = 12
             let queryOption = {
                 limit: limit,
                 offset: (page - 1) * limit
@@ -57,6 +65,17 @@ class ControllerExercise {
             if (!exercise) throw ({ name: 'Not Found', message: 'Exercise not found' })
             await exercise.destroy()
             res.status(200).json({ message: 'Exercise successfully deleted' })
+        } catch (error) {
+            console.log(error)
+            next(error)
+        }
+    }
+
+    static async getExerciseById(req, res, next){
+        let {id} = req.params
+        try {
+            let exercise = await Exercise.findByPk(id)
+            res.status(200).json(exercise)
         } catch (error) {
             console.log(error)
             next(error)

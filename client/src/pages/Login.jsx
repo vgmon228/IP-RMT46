@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from 'axios'
 import { useNavigate, Link } from "react-router-dom"
 
@@ -19,6 +19,28 @@ export default function Login() {
         } catch (error) {
             console.log(error)
         }
+
+        const handleCredentialResponse = async ({ credential }) => {
+            const { data } = await axios.post("http://localhost:3000/google-login", {
+                googleToken: credential,
+            });
+            localStorage.setItem('token', data.access_token);
+            nav('/');
+        };
+
+        useEffect(() => {
+            window.onload = function(){
+            google.accounts.id.initialize({
+                client_id:
+                    "815803836973-3qha9cn8140rl4da30p3iq9ggv6qgi05.apps.googleusercontent.com",
+                callback: handleCredentialResponse,
+            });
+            google.accounts.id.renderButton(
+                document.getElementById("buttonDiv"),
+                { theme: "outline", size: "large" } 
+            );
+        }
+        }, []);
     }
     return (
         <>
@@ -31,6 +53,7 @@ export default function Login() {
                 <button type="submit">Login</button>
             </form>
             <p>Dont have account? <Link to={'/register'}>Register</Link></p>
+            <div id="buttonDiv"></div>
         </>
     )
 }
