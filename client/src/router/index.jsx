@@ -4,6 +4,7 @@ import Register from '../pages/Register'
 import Home from '../pages/Home'
 import Create from '../pages/Create'
 import Bmi from '../pages/Bmi'
+import Update from '../pages/Update'
 
 
 const router = createBrowserRouter([
@@ -38,6 +39,13 @@ const router = createBrowserRouter([
 {
     path:'/bmi',
     element:<Bmi/>,
+    loader: () =>{
+        return !localStorage.getItem('token') ? redirect('/login') : null 
+    }
+},
+{
+    path:'/update/:id',
+    element:<Update/>,
     loader: () =>{
         return !localStorage.getItem('token') ? redirect('/login') : null 
     }

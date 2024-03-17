@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Create() {
     let nav = useNavigate()
@@ -46,25 +46,27 @@ export default function Create() {
     }, [])
     return (
         <div>
-            <form>
+            <h1>Add Exercise</h1>
+            <form onSubmit={handleSubmit}>
                 <p>Name</p>
-                <input type="text" />
+                <input type="text" name="name" value={name} onChange={(e)=>setName(e.target.value)}/>
                 <p>Type</p>
-                <input type="text" />
+                <input type="text" name="type" value={type} onChange={(e)=>setType(e.target.value)}/>
                 <p>Muscle</p>
-                <select name="MuscleId" value={muscleId} onChange={(e)=>setMuscleId(e.target.value)}>
+                <select name="MuscleId" value={muscleId} onChange={(e) => setMuscleId(e.target.value)}>
                     {muscle.map((e) => {
                         <option key={e.muscleId} value={e.muscleId}>{e.muscle}</option>
                     })}
                 </select>
                 <p>Equpiment</p>
-                <input type="text" />
+                <input type="text" name="equipment" value={equipment} onChange={(e)=>setEquipment(e.target.value)}/>
                 <p>Difficulty</p>
-                <input type="text" />
+                <input type="text" name="difficulty" value={difficulty} onChange={(e)=>setDifficulty(e.target.value)}/>
                 <p>Instructions</p>
-                <input type="text" />
+                <input type="text" name="instructions" value={instructions} onChange={(e)=>setInstructions(e.target.value)}/>
                 <p></p>
-                <button type="submit">Add</button>
+                <Link to={'/'}>Cancel</Link>
+                <button type="submit">Edit</button>
             </form>
         </div>
     )

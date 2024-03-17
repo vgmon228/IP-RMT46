@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom"
+
+
 export default function Card({ exercise, onDelete }) {
     const trimText = (text) => {
         if (text.length > 100) {
@@ -13,7 +16,7 @@ export default function Card({ exercise, onDelete }) {
                 <p className="card-text">
                     {trimText(exercise.instructions)}
                 </p>
-                <button>Update</button>
+                <Link to={`/update/${exercise.id}`}>Update</Link>
                 <button onClick={()=>onDelete}>Delete</button>
             </div>
         </div>
