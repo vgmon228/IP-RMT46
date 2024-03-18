@@ -55,7 +55,7 @@ export default function Create() {
                 <p>Muscle</p>
                 <select name="MuscleId" value={muscleId} onChange={(e) => setMuscleId(e.target.value)}>
                     {muscle.map((e) => {
-                        <option key={e.muscleId} value={e.muscleId}>{e.muscle}</option>
+                        return <option key={e.muscleId} value={e.muscleId}>{e.muscle}</option>
                     })}
                 </select>
                 <p>Equpiment</p>

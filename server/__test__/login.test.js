@@ -11,7 +11,7 @@ const user_1 = {
     password: '12345'
 }
 
-describe.skip("POST /login", () => {
+describe("POST /login", () => {
     describe("Success",  () => {
         test('should return status 200 and object of access_token', async () => {
             let { status, body } = await request(app).post("/login").send(user_1)

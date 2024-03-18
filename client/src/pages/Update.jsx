@@ -11,9 +11,9 @@ export default function Update() {
     let [equipment, setEquipment] = useState("")
     let [difficulty, setDifficulty] = useState("")
     let [instructions, setInstructions] = useState("")
-    let [data,setData]= useState()
+    let [data, setData] = useState()
     const fetchData = async () => {
-        let {id} = useParams()
+        let { id } = useParams()
         try {
             let { data } = await axios({
                 url: 'http://localhost:3000/exercise/' + id,
@@ -49,10 +49,11 @@ export default function Update() {
     }
     const handleSubmit = async (event) => {
         event.preventDefault()
+        let { id } = useParams()
         try {
             await axios({
-                url: 'http://localhost:3000/exercise',
-                method: 'POST',
+                url: 'http://localhost:3000/exercise/' + id,
+                method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 },
@@ -72,21 +73,21 @@ export default function Update() {
             <h1>Update Exercise</h1>
             <form onSubmit={handleSubmit}>
                 <p>Name</p>
-                <input type="text" name="name" value={name} onChange={(e)=>setName(e.target.value)}/>
+                <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} />
                 <p>Type</p>
-                <input type="text" name="type" value={type} onChange={(e)=>setType(e.target.value)}/>
+                <input type="text" name="type" value={type} onChange={(e) => setType(e.target.value)} />
                 <p>Muscle</p>
                 <select name="MuscleId" value={muscleId} onChange={(e) => setMuscleId(e.target.value)}>
                     {muscle.map((e) => {
-                        <option key={e.muscleId} value={e.muscleId}>{e.muscle}</option>
+                        return <option key={e.muscleId} value={e.muscleId}>{e.muscle}</option>
                     })}
                 </select>
                 <p>Equpiment</p>
-                <input type="text" name="equipment" value={equipment} onChange={(e)=>setEquipment(e.target.value)}/>
+                <input type="text" name="equipment" value={equipment} onChange={(e) => setEquipment(e.target.value)} />
                 <p>Difficulty</p>
-                <input type="text" name="difficulty" value={difficulty} onChange={(e)=>setDifficulty(e.target.value)}/>
+                <input type="text" name="difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)} />
                 <p>Instructions</p>
-                <input type="text" name="instructions" value={instructions} onChange={(e)=>setInstructions(e.target.value)}/>
+                <input type="text" name="instructions" value={instructions} onChange={(e) => setInstructions(e.target.value)} />
                 <p></p>
                 <Link to={'/'}>Cancel</Link>
                 <button type="submit">Edit</button>

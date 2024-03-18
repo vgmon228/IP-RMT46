@@ -8,7 +8,7 @@ const { queryInterface } = sequelize;
 
 let access_token
 
-describe.skip("POST /bmi", () => {
+describe("POST /bmi", () => {
     describe("Success", () => {
         test('should return status 200', async () => {
             let { status, body } = await request(app).post("/bmi").set("Authorization", "Bearer " + access_token).send({

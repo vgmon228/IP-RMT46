@@ -9,7 +9,7 @@ const user_1 = {
     password: '12345'
 }
 
-describe.skip("POST /register", () => {
+describe("POST /register", () => {
     describe("Success", () => {
         test('should return status 201', async () => {
             let { status, body } = await request(app).post("/register").send({    

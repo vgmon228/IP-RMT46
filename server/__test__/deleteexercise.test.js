@@ -7,7 +7,7 @@ const { signToken } = require("../helper/jwt");
 
 let access_token
 
-describe.skip("DELETE /exercise", () => {
+describe("DELETE /exercise", () => {
     describe("Success", () => {
         test('should return status 200', async () => {
             let { status, body } = await request(app).delete("/exercise/1").set("Authorization", "Bearer " + access_token)

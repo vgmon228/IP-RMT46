@@ -7,7 +7,7 @@ const { signToken } = require("../helper/jwt");
 
 let access_token
 
-describe.skip("POST /exercise", () => {
+describe("POST /exercise", () => {
     describe("Success", () => {
         test('should return status 200', async () => {
             let { status, body } = await request(app).post("/exercise").set("Authorization", "Bearer " + access_token).send({
