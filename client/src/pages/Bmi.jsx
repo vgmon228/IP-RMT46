@@ -9,7 +9,7 @@ export default function Bmi() {
     const fetchBmi = async (event) => {
         event.preventDefault()
         let { data } = await axios({
-            url: 'http://localhost:3000/bmi',
+            url: 'https://branded-things-api.vasugeramona.xyz/bmi',
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

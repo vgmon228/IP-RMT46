@@ -10,7 +10,7 @@ export default function Register() {
         event.preventDefault()
         try {
             await axios({
-                url: 'http://localhost:3000/register',
+                url: 'https://branded-things-api.vasugeramona.xyz/register',
                 method: 'POST',
                 data: { username: username, email: email, password: password }
             })

@@ -16,7 +16,7 @@ export default function Update() {
         let { id } = useParams()
         try {
             let { data } = await axios({
-                url: 'http://localhost:3000/exercise/' + id,
+                url: 'https://branded-things-api.vasugeramona.xyz/exercise/' + id,
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -36,7 +36,7 @@ export default function Update() {
     const fetchDataMuscle = async () => {
         try {
             let { data } = await axios({
-                url: 'http://localhost:3000/muscle',
+                url: 'https://branded-things-api.vasugeramona.xyz/muscle',
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -52,7 +52,7 @@ export default function Update() {
         let { id } = useParams()
         try {
             await axios({
-                url: 'http://localhost:3000/exercise/' + id,
+                url: 'https://branded-things-api.vasugeramona.xyz/exercise/' + id,
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`

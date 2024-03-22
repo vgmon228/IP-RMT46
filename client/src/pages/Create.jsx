@@ -14,7 +14,7 @@ export default function Create() {
     const fetchDataMuscle = async () => {
         try {
             let { data } = await axios({
-                url: 'http://localhost:3000/muscle',
+                url: 'https://branded-things-api.vasugeramona.xyz/muscle',
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -29,7 +29,7 @@ export default function Create() {
         event.preventDefault()
         try {
             await axios({
-                url: 'http://localhost:3000/exercise',
+                url: 'https://branded-things-api.vasugeramona.xyz/exercise',
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`

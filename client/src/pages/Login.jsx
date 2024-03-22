@@ -10,7 +10,7 @@ export default function Login() {
         event.preventDefault()
         try {
             let { data } = await axios({
-                url: 'http://localhost:3000/login',
+                url: 'https://branded-things-api.vasugeramona.xyz/login',
                 method: 'POST',
                 data: { email: email, password: password }
             })
@@ -19,17 +19,17 @@ export default function Login() {
         } catch (error) {
             console.log(error)
         }
+    }
+    const handleCredentialResponse = async ({ credential }) => {
+        const { data } = await axios.post("https://branded-things-api.vasugeramona.xyz/google-login", {
+            googleToken: credential,
+        });
+        localStorage.setItem('token', data.access_token);
+        nav('/');
+    };
 
-        const handleCredentialResponse = async ({ credential }) => {
-            const { data } = await axios.post("http://localhost:3000/google-login", {
-                googleToken: credential,
-            });
-            localStorage.setItem('token', data.access_token);
-            nav('/');
-        };
-
-        useEffect(() => {
-            window.onload = function(){
+    useEffect(() => {
+        window.onload = function () {
             google.accounts.id.initialize({
                 client_id:
                     "815803836973-3qha9cn8140rl4da30p3iq9ggv6qgi05.apps.googleusercontent.com",
@@ -37,11 +37,10 @@ export default function Login() {
             });
             google.accounts.id.renderButton(
                 document.getElementById("buttonDiv"),
-                { theme: "outline", size: "large" } 
+                { theme: "outline", size: "large" }
             );
         }
-        }, []);
-    }
+    }, []);
     return (
         <>
             <form onSubmit={handleSubmit}>
